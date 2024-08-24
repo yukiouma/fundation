@@ -1,0 +1,46 @@
+POST http://localhost:8080/fund
+content-type: application/json
+
+{
+    "name": "",
+    "code": "159513"
+}
+
+###
+
+POST http://localhost:8080/nav
+content-type: application/json
+
+{
+    "data": [
+        {
+            "fund_id": 1,
+            "date": 1719981505,
+            "nav": 1.069,
+            "cnav": 1.514,
+            "growth": -3.69
+        }
+    ]
+}
+
+###
+GET http://localhost:8080/nav?code=320007
+
+###
+GET http://localhost:8080/fund?code=320007
+
+###
+
+POST http://localhost:8080/stat
+content-type: application/json
+
+{
+    "month": [1, 2, 3, 6, 12, 24, 36],
+    "code": ["320007", "161725"]
+}
+
+###
+GET http://localhost:8080/fund/list
+
+###
+GET http://localhost:8080/nav/latest?code=320007
