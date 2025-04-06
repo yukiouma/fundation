@@ -1,3 +1,4 @@
+use crate::dto::{Fund, Nav, NavStatPanel};
 use chrono::{DateTime, Utc};
 use fund::{find_fund_by_code, list_funds, save_fund};
 use fund_nav::{
@@ -5,8 +6,6 @@ use fund_nav::{
     nav_stat_panel_existed, save_nav,
 };
 use sqlx::{MySql, Pool};
-
-use crate::dto::{Fund, Nav, NavStatPanel};
 
 mod fund;
 mod fund_nav;
@@ -106,14 +105,14 @@ mod test {
         repo.save_fund(fund).await.unwrap();
         let fund = repo.find_fund_by_code(code).await.unwrap().unwrap();
         let fund_id = fund.id.unwrap();
-        let timestamp = DateTime::from_timestamp_millis(1719843534000).unwrap();
+        let timestamp = DateTime::from_timestamp_millis(1743552000000).unwrap();
         let navs = vec![
             Nav {
                 fund_id,
                 growth: 1.0,
                 nav: 1.0,
                 cnav: 1.0,
-                date: timestamp.checked_sub_days(Days::new(0)).unwrap(),
+                date: timestamp.checked_sub_days(Days::new(1)).unwrap(),
                 ..Default::default()
             },
             Nav {
@@ -121,7 +120,7 @@ mod test {
                 growth: 2.0,
                 nav: 2.0,
                 cnav: 2.0,
-                date: timestamp.checked_sub_days(Days::new(4)).unwrap(),
+                date: timestamp,
                 ..Default::default()
             },
         ];

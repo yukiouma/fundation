@@ -1,7 +1,6 @@
+use crate::dto::{Nav, NavStatPanel};
 use chrono::{DateTime, Utc};
 use sqlx::{query, query_as, MySql, Pool};
-
-use crate::dto::{Nav, NavStatPanel};
 
 pub async fn save_nav(pool: &Pool<MySql>, nav_list: &[Nav]) -> anyhow::Result<()> {
     if nav_list.is_empty() {

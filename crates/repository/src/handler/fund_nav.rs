@@ -1,9 +1,4 @@
-use anyhow::anyhow;
-use axum::{
-    extract::{Query, State},
-    Json,
-};
-
+use super::error::AppError;
 use crate::{
     dto::{
         FindLatestNavDateReply, FindLatestNavReply, FindLatestNavRequest, FindNavStatPanelReply,
@@ -11,8 +6,11 @@ use crate::{
     },
     DataRepo,
 };
-
-use super::error::AppError;
+use anyhow::anyhow;
+use axum::{
+    extract::{Query, State},
+    Json,
+};
 
 pub async fn save_nav(
     State(repo): State<DataRepo>,

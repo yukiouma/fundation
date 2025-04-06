@@ -1,3 +1,51 @@
+[package]
+name = "fundation"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "repository"
+path = "bin/repository/main.rs"
+
+[[bin]]
+name = "fetcher"
+path = "bin/fetcher/main.rs"
+
+[[bin]]
+name = "analyzer"
+path = "bin/analyzer/main.rs"
+
 [workspace]
-resolver = "2"
-members = [ "analyzer", "apis","fetcher", "repository"]
+members = [
+    "crates/analyzer",
+    "crates/apis",
+    "crates/fetcher",
+    "crates/repository",
+]
+
+[dependencies]
+dotenv = { workspace = true }
+axum = { workspace = true }
+sqlx = { workspace = true }
+anyhow = { workspace = true }
+tokio = { workspace = true }
+tower-http = { version = "0.5.2", features = ["trace"] }
+tracing = "0.1.40"
+tracing-subscriber = "0.3.18"
+repository = { path = "crates/repository" }
+fetcher = { path = "crates/fetcher" }
+analyzer = { path = "crates/analyzer" }
+apis = { path = "crates/apis" }
+chrono = { workspace = true }
+
+[workspace.dependencies]
+dotenv = "0.15.0"
+anyhow = "1.0.86"
+tokio = { version = "1.38.0", features = ["full"] }
+axum = "0.7.5"
+sqlx = { version = "0.7.4", features = [
+    "mysql",
+    "runtime-tokio-native-tls",
+    "chrono",
+] }
+chrono = "0.4.38"

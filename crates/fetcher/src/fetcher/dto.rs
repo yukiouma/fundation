@@ -35,7 +35,7 @@ pub struct Fund {
     pub code: String,
 }
 
-#[derive(Debug, Default, Serialize)]
+#[derive(Debug, Default, Serialize, Deserialize)]
 pub struct Nav {
     pub fund_id: i64,
     pub date: i64,

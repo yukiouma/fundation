@@ -1,5 +1,3 @@
-use std::env;
-
 use axum::{
     extract::{MatchedPath, Request},
     routing::{get, post},
@@ -10,6 +8,7 @@ use repository::{
     DataRepo,
 };
 use sqlx::MySqlPool;
+use std::env;
 use tower_http::trace::TraceLayer;
 use tracing::{info, info_span};
 
@@ -18,7 +17,7 @@ async fn main() -> anyhow::Result<()> {
     dotenv::dotenv().ok();
 
     tracing_subscriber::fmt()
-        .with_max_level(tracing::Level::TRACE)
+        .with_max_level(tracing::Level::DEBUG)
         .init();
 
     let database_url = env::var(&"DATABASE_URL")?;

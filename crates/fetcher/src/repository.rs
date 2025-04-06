@@ -1,6 +1,8 @@
+use crate::{
+    fetcher::{Fund, ListFundsResponse, SaveNavsRequest},
+    Nav,
+};
 use reqwest::{blocking::Client, Url};
-
-use crate::dto::{Fund, ListFundsResponse, SaveNavsRequest};
 
 const CONTENT_TYPE: &str = "Content-Type";
 const APPLICATION_JSON: &str = "application/json";
@@ -53,6 +55,17 @@ impl Repository {
         let response = self.client.get(url).send()?;
         let response: ListFundsResponse = serde_json::from_slice(&response.bytes()?.to_vec())?;
         Ok(response.data)
+    }
+
+    pub fn find_latest_nav(&self, fund_code: &str) -> anyhow::Result<Option<Nav>> {
+        let url = self.base_url.join("nav/latest")?;
+        let response = self.client.get(url).query(&[("code", fund_code)]).send()?;
+        if response.status().ne(&reqwest::StatusCode::OK) {
+            return Ok(None);
+        }
+        let bytes = response.bytes()?.to_vec();
+        let nav: Nav = serde_json::from_slice(&bytes)?;
+        Ok(Some(nav))
     }
 }
 

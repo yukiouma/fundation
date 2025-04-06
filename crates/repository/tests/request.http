@@ -3,7 +3,7 @@ content-type: application/json
 
 {
     "name": "",
-    "code": "159513"
+    "code": "004854"
 }
 
 ###
@@ -24,23 +24,22 @@ content-type: application/json
 }
 
 ###
-GET http://localhost:8080/nav?code=320007
+GET http://localhost:8080/nav?code=017437
 
 ###
-GET http://localhost:8080/fund?code=320007
+GET http://localhost:8080/fund?code=017437
 
 ###
-
 POST http://localhost:8080/stat
 content-type: application/json
 
 {
     "month": [1, 2, 3, 6, 12, 24, 36],
-    "code": ["320007", "161725"]
+    "code": ["017437", "004243", "012348", "020111", "007301", "004854"]
 }
 
 ###
 GET http://localhost:8080/fund/list
 
 ###
-GET http://localhost:8080/nav/latest?code=320007
+GET http://localhost:8080/nav/latest?code=017437

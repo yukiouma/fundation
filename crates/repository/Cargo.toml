@@ -1,0 +1,13 @@
+[package]
+name = "repository"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = { workspace = true }
+axum = { workspace = true }
+chrono = { workspace = true }
+dotenv = { workspace = true }
+serde = { version = "1.0.203", features = ["derive"] }
+sqlx = { workspace = true }
+tokio = { workspace = true }

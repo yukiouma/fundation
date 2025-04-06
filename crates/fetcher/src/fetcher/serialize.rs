@@ -1,4 +1,4 @@
-use chrono::{Local, TimeZone};
+use chrono::{TimeZone, Utc};
 use serde::{de, Deserialize, Deserializer};
 
 pub fn f64_from_str<'de, D>(deserializer: D) -> Result<f64, D::Error>
@@ -24,7 +24,7 @@ where
     let month = ymd[1].parse::<u32>().map_err(de::Error::custom)?;
     let day = ymd[2].parse::<u32>().map_err(de::Error::custom)?;
 
-    match Local.with_ymd_and_hms(year, month, day, 0, 0, 0) {
+    match Utc.with_ymd_and_hms(year, month, day, 0, 0, 0) {
         chrono::offset::LocalResult::Single(datetime) => Ok(datetime.timestamp_millis()),
         chrono::offset::LocalResult::Ambiguous(datetime, _) => Ok(datetime.timestamp_millis()),
         chrono::offset::LocalResult::None => Err(de::Error::custom("failed to parse date time")),

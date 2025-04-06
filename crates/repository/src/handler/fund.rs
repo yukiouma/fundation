@@ -1,15 +1,13 @@
+use super::error::AppError;
+use crate::{
+    dto::{FindFundByCodeRequest, Fund, GeneralReply, ListFundsReply},
+    DataRepo,
+};
 use anyhow::anyhow;
 use axum::{
     extract::{Query, State},
     Json,
 };
-
-use crate::{
-    dto::{FindFundByCodeRequest, Fund, GeneralReply, ListFundsReply},
-    DataRepo,
-};
-
-use super::error::AppError;
 
 pub async fn save_fund(
     State(repo): State<DataRepo>,
